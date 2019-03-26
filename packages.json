@@ -1,0 +1,9 @@
+{
+  "python": [
+    "ide-python"
+  ],
+  "git": [
+    "git-plus",
+    "git-log"
+  ]
+}
