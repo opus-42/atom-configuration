@@ -22,5 +22,6 @@
 * (git-time-machine)
 
 # Python
+*
 * docblock-python
 (* hydrogen)

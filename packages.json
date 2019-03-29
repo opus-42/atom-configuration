@@ -1,6 +1,7 @@
 {
   "python": [
-    "ide-python"
+    "ide-python",
+    "dockblock"
   ],
   "git": [
     "git-plus",

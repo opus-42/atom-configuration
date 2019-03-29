@@ -4,25 +4,32 @@ category=$1
 
 # Array contains function
 array_contains () {
-    local array="$1[@]"
-    local seeking=$2
-    local in=1
-    for element in "${array[@]}"; do
-        if [[ $element == $seeking ]]; then
-            in=0
-            break
-        fi
-    done
-    return $in
+  local seeking=$1
+  shift
+  local array=("$@")
+  in=0
+  for element in "${array[@]}"; do
+    if [[ $element == $seeking ]]; then
+        in=1
+        break
+    fi
+  done
+  echo $in
 }
 
 # List installed packages
-# WIP installed_packages=$(apm ls -i -b | sed 's/')
+installed_packages=($(apm ls -i -b | sed 's/\(.*\)@.*/\1/'))
 
-package_list=$(cat ./packages.json | jq -c -r ".${category}[]")
-echo "Going to install the following packages: "$package_list
+# List packages to install
+package_list=($(cat ./packages.json | jq -c -r ".${category}[]"))
+echo "Going to install the following packages: "${package_list[@]}
 
-for row in $package_list; do
-  #array_contains installed_packages $row && echo yes || echo no
-  apm install $row
+for row in ${package_list[@]}; do
+  installed=$(array_contains $row "${installed_packages[@]}")
+  if [[ $installed -eq 0 ]]; then
+    echo "Installing $row..."
+    apm install $row
+  else
+    echo "$row already installed. Skipping..."
+  fi
 done
