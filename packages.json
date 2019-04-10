@@ -6,5 +6,12 @@
   "git": [
     "git-plus",
     "git-log"
+  ],
+  "terraform": [
+    "language-terraform",
+    "linter-terraform-syntax"
+  ],
+  "general": [
+    "linter"
   ]
 }
