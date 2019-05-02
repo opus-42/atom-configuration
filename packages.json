@@ -1,7 +1,8 @@
 {
   "python": [
     "ide-python",
-    "dockblock"
+    "dockblock",
+    "python-autopep8"
   ],
   "git": [
     "git-plus",
